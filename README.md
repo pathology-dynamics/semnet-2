@@ -65,7 +65,7 @@ If you feel that this repo can be improved in any way and would like to contribu
 
 ## Credits
 
-To cite this project and/or code, please use `citation.bib`, which is provided in the repository. 
+To cite this project and/or code, please use `citation.bib`. 
 
 Alternatively, use GitHub's built in citation feature / CITATION.cff.
 
