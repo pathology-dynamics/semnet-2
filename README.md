@@ -1,4 +1,3 @@
-
 # SemNet
 
 This repository provides source code, tests, and examples for SemNet 2.0. 
@@ -6,10 +5,10 @@ This repository provides source code, tests, and examples for SemNet 2.0.
 SemNet (now SemNet 2.0) is a group of modules for working with semantic networks, specifically those built using the Semantic MEDLINE Database (SemMedDB) repository of semantic predications. These predications (subject-predicate-object triples) are modeled as nodes (subject and object) and edges (predicate) to create an expansive biomedical concept graph. Algorithms (detailed in the SemNet 2.0 paper) were then implemented to rank nodes in terms of their connections to other nodes, allowing for intuitive and novel literature based discovery. 
 
 Why SemNet 2.0?
-* Improvements on algorithm efficiency.
+* Improved algorithm efficiency.
 * Re-engineered graph data structure.
 * Replacement of ULARA and improved rank aggregation.
-* Potential 1,000,000,000 fold speed improvement compared to the original SemNet (see SemNet 2.0 paper for more precisely quantified results).
+* Potential 1,000,000,000 fold speed increase compared to the original SemNet (see SemNet 2.0 paper for more precisely quantified tests/results).
 
 ## Table of Contents
 
@@ -28,7 +27,7 @@ SemNet 2.0 uses the following technologies:
 * Python == 3.9.6
   * numpy == 1.20.3
 
-The examples and testing scripts use the following technologies:
+The example notebook and testing scripts use the following technologies:
 
 * Python == 3.9.6
   * numpy == 1.20.3
