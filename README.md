@@ -61,7 +61,7 @@ This project is currently released for public use and is being actively maintain
 
 ## Contributing
 
-If you feel that this repo can be improved in any way and would like to contribute, contact Anna Kirkpatrick <akirkpatrick3@gatech.edu>, <sallegri3@gatech.edu>, and Cassie Mitchell <cassie.mitchell@bme.gatech.edu>.
+If you feel that this repo can be improved in any way and would like to contribute, contact Anna Kirkpatrick <akirkpatrick3@gatech.edu>, Stephen Allegri <sallegri3@gatech.edu>, and Cassie Mitchell <cassie.mitchell@bme.gatech.edu>.
 
 ## Credits
 
