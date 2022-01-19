@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Kirkpatrick
+    given-names: Anna
+title: "SemNet"
+version: 2.0.0
+date-released: 2022-01-17

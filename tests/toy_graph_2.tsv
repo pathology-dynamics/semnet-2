@@ -1,0 +1,17 @@
+	start_node	start_type	end_node	end_type	relation	weight
+0	s	t1	a	t2	r1	1
+1	s	t1	b	t2	r1	1
+2	a	t2	c	t3	r1	1
+3	b	t2	d	t3	r1	1
+4	b	t2	e	t3	r1	1
+5	b	t2	f	t3	r1	1
+6	c	t3	g	t4	r1	1
+7	c	t3	h	t4	r1	1
+8	d	t3	h	t4	r1	1
+9	g	t4	i	t5	r1	1
+10	h	t4	j	t5	r1	1
+11	i	t5	l	t6	r1	1
+12	j	t5	m	t6	r1	1
+13	k	t5	m	t6	r1	1
+14	l	t6	t	t7	r1	1
+15	m	t6	t	t7	r1	1
