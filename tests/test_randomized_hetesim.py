@@ -3,7 +3,7 @@
 import sys
 import pandas as pd
 
-sys.path.insert(0, 'path_to_semnet')
+# sys.path.insert(0, 'path_to_semnet')
 from semnet.offline import HetGraph
 from semnet.randomized_hetesim import randomized_pruned_hetesim, restricted_random_walk_on_metapath, randomized_pruned_hetesim_all_metapaths, approximate_mean_pruned_hetesim
 
