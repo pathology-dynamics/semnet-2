@@ -9,10 +9,8 @@ import logging
 from collections import defaultdict as dd
 import numpy as np
 
-
 # Set up logging
 logger = logging.getLogger('__file__')
-
 
 class HetGraph():
     """
@@ -170,17 +168,10 @@ class HetGraph():
                 # Note: Neighbors is a dict of format {node_type:set(nodes)}
                 if rel2inv[rel] in self.incoming_edges[node]:
                     for node_type, node_set in neighbors.items():
-                        # print()
-                        # print("Node type:", node_type)
-                        # print("Node set:", node_set)
-                        # print("Node:", node)
-                        # print("rel2inv[rel]:", rel2inv[rel])
-                        # print()
                         self.incoming_edges[node][rel2inv[rel]][node_type] |= node_set
-                        # self.schema_incoming_edges[node2type[node]][rel2inv[rel]].add(node_type)
+
                 else:
                     self.incoming_edges[node][rel2inv[rel]] = neighbors
-                    # self.schema_incoming_edges[node2type[node]][rel2inv[rel]] = {node_type}
 
         # Inverse edges from incoming
         logger.info("Adding inverse outgoing edges")
@@ -191,10 +182,9 @@ class HetGraph():
                 if rel2inv[rel] in self.outgoing_edges[node]:
                     for node_type, node_set in neighbors.items():
                         self.outgoing_edges[node][rel2inv[rel]][node_type] |= node_set
-                        # self.schema_outgoing_edges[node2type[node]][rel2inv[rel]].add(node_type)
+
                 else:
                     self.outgoing_edges[node][rel2inv[rel]] = neighbors
-                    # self.schema_outgoing_edges[node2type[node]][rel2inv[rel]] = {node_type}
 
         # Add inverse relations to relation list
         for key, val in rel2inv.items():
@@ -363,15 +353,13 @@ class HetGraph():
 
         # If depth is 0, just return current node
         if depth == 0:
-            # yield ({node}, [])
             yield ({self.node2type[node]:{node}}, [])
 
         # If depth is 1, return each set of neighbors and the path used to get there
         elif depth == 1:
             for (next_path, next_dict) in self.outgoing_edges[node].items():
                 current_path = self._merge_paths(curr_path, node, next_path)
-                # for node_type, node_set in next_dict.items():
-                    # yield (node_set - set(current_path), current_path)
+
                 yield (next_dict, current_path)
 
         # Otherwise, recursively travel down edges until we reach depth 1
@@ -412,15 +400,13 @@ class HetGraph():
 
         # If depth is 0, just return current node (is a type, because in schema)
         if depth == 0:
-            # yield ({node}, [])
             yield ({node}, [])
 
         # If depth is 1, return each set of neighbors and the path used to get there
         elif depth == 1:
             for (next_path, next_nodes) in self.schema_outgoing_edges[node].items():
                 current_path = self._merge_paths(curr_path, node, next_path)
-                # for node_type, node_set in next_dict.items():
-                    # yield (node_set - set(current_path), current_path)
+
                 yield (next_nodes, current_path)
 
         # Otherwise, recursively travel down edges until we reach depth 1
@@ -479,8 +465,7 @@ class HetGraph():
         elif depth == 1:
             for (next_path, next_nodes) in self.schema_incoming_edges[node].items():
                 current_path = self._merge_paths(next_path, node, curr_path)
-                # for node_type, node_set in next_dict.items():
-                    # yield (node_set - set(current_path), current_path)
+
                 yield (next_nodes, current_path)
 
         # Otherwise, recursively travel down edges until we reach depth 1
@@ -512,7 +497,7 @@ class HetGraph():
 
         # Get edges to next node
         for edge_type, node_group in self.incoming_edges[node].items():
-            # for node_type, node_set in node_group:
+
             yield node_group, [edge_type]
 
 
@@ -571,7 +556,6 @@ class HetGraph():
         reachable_nodes_by_depth[0].add(source_node)
 
         for d in range(mp_len):
-            cur_node_type = metapath[2*d]
             next_node_type = metapath[2*(d+1)]
             relation = metapath[2*d + 1]
 

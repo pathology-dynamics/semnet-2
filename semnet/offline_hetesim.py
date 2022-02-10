@@ -134,10 +134,6 @@ def _compute_hs_vector_from_left(graph, start_node, metapath):
         relation = metapath[2*i + 1]
         next_node_type = metapath[2*i + 2]
 
-        #print("current_node_type: " + current_node_type)
-        #print("relation: " + relation)
-        #print("next_node_type: " + next_node_type)
-
         for cur_node in node_probs[i].keys():
             neighbors = graph.outgoing_edges[cur_node][relation][next_node_type]
             weighted_degree = sum([graph.outgoing_edge_weights[cur_node][relation][n] for n in neighbors])
@@ -148,8 +144,6 @@ def _compute_hs_vector_from_left(graph, start_node, metapath):
                     node_probs[i+1][n] += new_prob
                 else:
                     node_probs[i+1][n] = new_prob
-        #print(str(node_probs))
-
 
     return node_probs[path_len]
 
@@ -346,11 +340,9 @@ def hetesim_all_metapaths(graph, source_nodes, target_nodes, path_len, find_meta
                 for mp in mps:
                     if not mp in metapaths:
                         metapaths.append(mp)
-        #print("New algorithm found " + str(len(metapaths)) +" metapaths.")
     else:
         metapaths = find_all_metapaths(graph, source_nodes, target_nodes, path_len)
 
-    # compute hetesim
     return hetesim(graph, source_nodes, target_nodes, metapaths)
 
 
@@ -421,8 +413,6 @@ def mean_hetesim_scores(graph, source_nodes, target_node, path_len, find_metapat
         total_score = 0
         for mp in hetesim_scores.keys():
             if node in hetesim_scores[mp] and target_node in hetesim_scores[mp][node]:
-                #print("Metapath: " + str(mp))
-                #print("Hetesim score: " + str(hetesim_scores[mp][node][target_node]))
                 total_score += hetesim_scores[mp][node][target_node]
         mean_score = total_score / num_mps
         mean_hetesim[node] = mean_score
@@ -479,24 +469,19 @@ def approximate_mean_hetesim_scores(graph, source_nodes, target_node, path_len, 
         schema_walks = [] # we use a list (not a set) here for faster random selections
         for s in source_nodes:
             for sw in graph.compute_fixed_length_schema_walks(graph.node2type[s], graph.node2type[target_node], length=path_len):
-                # print("sw: " + str(sw))
                 if not sw in schema_walks:
                     schema_walks.append(sw)
+
         # schema_walks is now all schema walks which MIGHT be valid metapaths
 
         num_mps_selected = 0
         selected_mps = []
-
 
         while num_mps_selected < m and len(schema_walks) > 0:
             candidate_mp = random.choice(schema_walks)
             found_path = False
             i = 0
             while (not found_path) and i < len(source_nodes):
-                # print("s: " + str(source_nodes[i]))
-                # print("t: " + str(target_node))
-                # print("metapath: " + str(candidate_mp))
-                # print("reachable_nodes: " + str(graph.compute_metapath_reachable_nodes(source_nodes[i], candidate_mp)))
                 if target_node in graph.compute_metapath_reachable_nodes(source_nodes[i], candidate_mp): # there is a path from a source node to target node along candidate_mp
                     found_path=True
                 i+=1

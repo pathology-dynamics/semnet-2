@@ -9,7 +9,6 @@ It is designed to work with the datastructure HetGraph given in offline.py
 import math
 import random
 
-
 def restricted_random_walk_on_metapath(graph, start_node, metapath, bad_nodes, walk_forward=True):
     """
     take a random walk in graph along a specified metapath, backtracking if you find a dead end
@@ -42,17 +41,11 @@ def restricted_random_walk_on_metapath(graph, start_node, metapath, bad_nodes, w
     """
 
     path_len = int((len(metapath)-1)/2)
-    #print(metapath)
-    #print(path_len)
     i=1
     node_stack=[]
     cur_node = start_node
 
     while i>0:
-        #print("i:  " + str(i))
-        #print("cur_node: " + cur_node)
-        #print("node_stack: " + str(node_stack))
-        #print("bad_nodes: " + str(bad_nodes))
         if i==path_len+1:
             return (bad_nodes, cur_node)
 
@@ -60,7 +53,6 @@ def restricted_random_walk_on_metapath(graph, start_node, metapath, bad_nodes, w
             neighbors = list( graph.outgoing_edges[cur_node][metapath[2*i -1]][metapath[2*i]] - bad_nodes[i-1] ) # set of neighbors of cur_node under the next relation in the metapath, except those in bad_nodes
         else:
             neighbors = list( graph.incoming_edges[cur_node][metapath[2*path_len + 1 - 2*i]][metapath[2*path_len - 2*i]] - bad_nodes[i-1] )
-        #print("neighbors: " + str(neighbors))
 
         #step forward if we can
         if len(neighbors) >0:
@@ -69,7 +61,6 @@ def restricted_random_walk_on_metapath(graph, start_node, metapath, bad_nodes, w
             else:
                 edge_weights = [graph.incoming_edge_weights[cur_node][metapath[2*path_len + 1 - 2*i]][y] for y in neighbors]
 
-            #print(edge_weights)
             node_stack.append(cur_node)
             cur_node = random.choices(neighbors, weights=edge_weights)[0] 
             i+=1
@@ -117,13 +108,9 @@ def randomized_pruned_hetesim(graph, start_nodes, end_nodes, metapaths, k_max, e
 
     c = (5 + 4*math.sqrt(2))/4
     C = 2*(c + math.sqrt(c**2+2*epsilon))**2 + epsilon*(c+math.sqrt(c**2+2*epsilon))
-    #print("C: " + str(C))
-    #print("c: " + str(c))
-    #print("epsilon: " + str(epsilon))
-    #print("k_max: " + str(k_max))
-    #print("r: " + str(r))
     N = math.ceil(math.ceil(C/(epsilon**2))*k_max*math.log(4*k_max/(1-r)))
     print("Computed value of N for randomized pruned hs:  " + str(N))
+
     return randomized_pruned_hetesim_given_N(graph, start_nodes, end_nodes, metapaths, k_max, N)
 
 
@@ -166,7 +153,7 @@ def randomized_pruned_hetesim_given_N(graph, start_nodes, end_nodes, metapaths, 
         fixed_mp_dict = {}
         for  s in start_nodes:
             fixed_mp_dict[s] =  _compute_approx_pruned_hs_vector_from_left(graph, s, lh, N)
-            #print(fixed_mp_dict[s])
+
         node_prob_left[str(lh)] = fixed_mp_dict
 
     # figure out what the set of second halves of metapaths is
@@ -182,7 +169,7 @@ def randomized_pruned_hetesim_given_N(graph, start_nodes, end_nodes, metapaths, 
         fixed_mp_dict = {}
         for  t in end_nodes:
             fixed_mp_dict[t] =  _compute_approx_pruned_hs_vector_from_right(graph, t, rh, N)
-            #print(fixed_mp_dict[t])
+
         node_prob_right[str(rh)] = fixed_mp_dict
 
     # create output dict phs[mp][s][t] 
@@ -256,8 +243,7 @@ def _compute_approx_pruned_hs_vector_from_left(graph, start_node, metapath, N):
 def _cos_similarity(vec_1, vec_2):
     if not vec_1 or not vec_2:
         return 0 # if either dictionary is empty, hs will be 0, so return 0
-    #print('vec_1' + str(vec_1))
-    #print('vec_2' + str(vec_2))
+
     # compute length of the two vectors
     vec_1_len = math.sqrt(math.fsum([j**2 for j in vec_1.values()]))
     vec_2_len = math.sqrt(math.fsum([j**2 for j in vec_2.values()]))
@@ -322,6 +308,7 @@ def _compute_approx_pruned_hs_vector_from_right(graph, end_node, metapath, N):
 
     for node in node_freqs:
         node_freqs[node]/=N
+        
     return node_freqs
 
 
@@ -436,7 +423,6 @@ def approximate_mean_pruned_hetesim(graph, source_nodes, target_node, path_len, 
     """
     #find all metapaths
     k_one_sided, mps = find_all_metapaths(graph, source_nodes, [target_node], path_len)
-
 
     #compute the required number of metapaths
     k_max = 2*k_one_sided
