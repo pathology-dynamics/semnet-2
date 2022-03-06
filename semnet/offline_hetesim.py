@@ -403,18 +403,20 @@ def mean_hetesim_scores(graph, source_nodes, target_node, path_len, find_metapat
             dict mapping source node cui to mean hetesim score
     """
 
-    hetesim_scores = hetesim_all_metapaths(graph, source_nodes, [target_node], path_len, find_metapaths_from_schema_walks=find_metapaths_from_schema_walks)
-
     mean_hetesim = {}
 
-    num_mps = len(hetesim_scores.keys())
-
     for node in source_nodes:
+        hetesim_scores = hetesim_all_metapaths(graph, [node], [target_node], path_len, find_metapaths_from_schema_walks=find_metapaths_from_schema_walks)
+
         total_score = 0
+        denom = 0
+
         for mp in hetesim_scores.keys():
             if node in hetesim_scores[mp] and target_node in hetesim_scores[mp][node]:
                 total_score += hetesim_scores[mp][node][target_node]
-        mean_score = total_score / num_mps
+                denom += 1
+
+        mean_score = total_score / denom
         mean_hetesim[node] = mean_score
 
     return mean_hetesim
