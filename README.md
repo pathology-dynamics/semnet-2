@@ -49,7 +49,7 @@ To see an example notebook using SemNet 2.0, navigate to `/examples/biomedical_k
 Unlike the original SemNet, SemNet 2.0 is designed to work with predications (derived from SemMedDB) specifically structured as a list of 'records' formatted Python dictionaries (see: https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_dict.html). `/examples/sample_data.csv` shows the first ten rows of a larger .csv file used in-house that has all of the necessary columns for the HetGraph object to create the knowledge graph (in this particular .csv each row corresponds to a predication). Converting the .csv file into the list of dictionaries can also be observed in `/examples/biomedical_kg_example.ipynb`. Finally, an inverse relationship dictionary is required for SemNet 2.0. See `rel2inv` in `biomedical_kg_example.ipynb`.
 
 Useful Links
-* SemNet 2.0 paper: tbd
+* SemNet 2.0 paper: https://www.mdpi.com/2504-2289/6/1/27
 * Original SemNet paper: <https://www.frontiersin.org/articles/10.3389/fbioe.2019.00156/full>
 * HeteSim paper: <https://arxiv.org/abs/1309.7393>
 * SemRep and SemMedDB: <https://lhncbc.nlm.nih.gov/ii/tools/SemRep_SemMedDB_SKR.html>
