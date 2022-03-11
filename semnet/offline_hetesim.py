@@ -412,9 +412,8 @@ def mean_hetesim_scores(graph, source_nodes, target_node, path_len, find_metapat
         denom = 0
 
         for mp in hetesim_scores.keys():
-            if node in hetesim_scores[mp] and target_node in hetesim_scores[mp][node]:
-                total_score += hetesim_scores[mp][node][target_node]
-                denom += 1
+            total_score += hetesim_scores[mp][node][target_node]
+            denom += 1
 
         mean_score = total_score / denom
         mean_hetesim[node] = mean_score
